@@ -1,0 +1,267 @@
+<!-- ADMINISTRADOR - admin.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador - FLEXFIT</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+  background-color: #111;
+    }
+    body {
+      background-color: transparent;
+      color: #f2f2f2;
+      padding: 20px;
+      margin: 0;
+      height: auto;
+      overflow-y: auto;
+      font-family: 'poppins', sans-serif ;
+    }
+    .lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      margin: auto;
+      width: 90vw;
+      display: flex;
+      justify-content: space-between;
+      z-index: -1;
+    }
+    .line {
+      position: relative;
+      width: 1px;
+      height: 100%;
+      overflow: hidden;
+    }
+    .line::after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 15vh;
+      width: 100%;
+      top: -50%;
+      left: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+      animation: drop 7s 0s infinite;
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+    }
+    .line:nth-child(1)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #FF4500 75%, #FF4500 100%); animation-delay: 0.5s; }
+    .line:nth-child(2)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #32CD32 75%, #32CD32 100%); animation-delay: 1s; }
+    .line:nth-child(3)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #1E90FF 75%, #1E90FF 100%); animation-delay: 1.5s; }
+    .line:nth-child(4)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #FFD700 75%, #FFD700 100%); animation-delay: 2s; }
+    .line:nth-child(5)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #8A2BE2 75%, #8A2BE2 100%); animation-delay: 2.5s; }
+    .line:nth-child(6)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #20B2AA 75%, #20B2AA 100%); animation-delay: 3s; }
+    .line:nth-child(7)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #DC143C 75%, #DC143C 100%); animation-delay: 3.5s; }
+    .line:nth-child(8)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #00FA9A 75%, #00FA9A 100%); animation-delay: 4s; }
+    .line:nth-child(9)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #FF1493 75%, #FF1493 100%); animation-delay: 4.5s; }
+    .line:nth-child(10)::after { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #00BFFF 75%, #00BFFF 100%); animation-delay: 5s; }
+
+    @keyframes drop {
+      0% { top: -50%; }
+      100% { top: 110%; }
+    }
+
+    h1 {
+      color: #00aaff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      background-color: #2f3e4f;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .card h3 {
+      color: #00aaff;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px 5px 5px 0;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0088cc;
+    }
+    input, select {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin: 5px 5px 10px 0;
+      width: calc(50% - 10px);
+      background-color: #1e2a36;
+      color: white;
+    }
+    select option {
+      background-color: #1e2a36;
+      color: white;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    ul li {
+      background-color: #1e2a36;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+    .routine {
+      background-color: #1e2a36;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .routine h4 {
+      margin: 0 0 10px;
+      color: #00aaff;
+    }
+    .stats p {
+      font-size: 1.1em;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="container">
+    <h1>Panel del Administrador</h1>
+
+    <div class="card">
+      <h3>Gestión de Profesionales y Usuarios</h3>
+      <div>
+        <input type="text" id="nombreUsuario" placeholder="Nombre del usuario">
+        <select id="rolUsuario">
+          <option value="usuario">Usuario</option>
+          <option value="profesional">Profesional</option>
+        </select>
+      </div>
+      <div>
+        <button onclick="agregarUsuario()">Agregar usuario</button>
+        <button onclick="verUsuarios()">Ver todos los usuarios</button>
+        <button onclick="eliminarUsuario()">Eliminar usuario</button>
+        <button onclick="promoverProfesional()">Promover a profesional</button>
+      </div>
+      <div id="usuariosLista"></div>
+    </div>
+
+    <div class="card">
+      <h3>Supervisión de Rutinas</h3>
+      <div id="rutinasAdmin"></div>
+    </div>
+
+    <div class="card stats">
+      <h3>Estadísticas del sistema</h3>
+      <p>Usuarios activos: 124</p>
+      <p id="contadorRutinas">Rutinas totales: 0</p>
+    </div>
+  </div>
+
+  <script>
+    let usuarios = [
+      { nombre: "Carlos", rol: "usuario" },
+      { nombre: "Ana", rol: "profesional" },
+      { nombre: "Luis", rol: "usuario" }
+    ];
+
+    let rutinasPendientes = JSON.parse(localStorage.getItem("rutinasFlexfit")) || [];
+
+    function agregarUsuario() {
+      const nombre = document.getElementById("nombreUsuario").value.trim();
+      const rol = document.getElementById("rolUsuario").value;
+      if (nombre) {
+        usuarios.push({ nombre, rol });
+        verUsuarios();
+        document.getElementById("nombreUsuario").value = "";
+      }
+    }
+
+    function verUsuarios() {
+      const contenedor = document.getElementById("usuariosLista");
+      contenedor.innerHTML = "<ul>" + usuarios.map(u => `<li>${u.nombre} - ${u.rol}</li>`).join('') + "</ul>";
+    }
+
+    function eliminarUsuario() {
+      const nombre = document.getElementById("nombreUsuario").value.trim();
+      usuarios = usuarios.filter(u => u.nombre.toLowerCase() !== nombre.toLowerCase());
+      verUsuarios();
+    }
+
+    function promoverProfesional() {
+      const nombre = document.getElementById("nombreUsuario").value.trim();
+      const usuario = usuarios.find(u => u.nombre.toLowerCase() === nombre.toLowerCase());
+      if (usuario) {
+        usuario.rol = "profesional";
+        verUsuarios();
+      }
+    }
+
+    function mostrarRutinasPendientes() {
+      const contenedor = document.getElementById("rutinasAdmin");
+      contenedor.innerHTML = "";
+      rutinasPendientes.forEach((r, i) => {
+        contenedor.innerHTML += `
+          <div class="routine">
+            <h4>${r.nombre}</h4>
+            <p>${r.descripcion}</p>
+            <button onclick="aceptarRutina(${i})">Aceptar</button>
+            <button onclick="rechazarRutina(${i})">Rechazar</button>
+          </div>
+        `;
+      });
+      document.getElementById("contadorRutinas").innerText = `Rutinas totales: ${rutinasPendientes.length}`;
+    }
+
+    function aceptarRutina(index) {
+      rutinasPendientes[index].aprobada = true;
+      localStorage.setItem("rutinasFlexfit", JSON.stringify(rutinasPendientes));
+      mostrarRutinasPendientes();
+    }
+
+    function rechazarRutina(index) {
+      rutinasPendientes.splice(index, 1);
+      localStorage.setItem("rutinasFlexfit", JSON.stringify(rutinasPendientes));
+      mostrarRutinasPendientes();
+    }
+
+    mostrarRutinasPendientes();
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel De Rutinas - FLEXFIT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+  background-color: #111;
+    }
+    body {
+      background-color: transparent;
+      color: #f2f2f2;
+      font-family: 'Poppins', sans-serif;
+      padding: 20px;
+      height: auto;
+      overflow-y: auto;
+    }
+    .lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      margin: auto;
+      width: 90vw;
+      display: flex;
+      justify-content: space-between;
+      z-index: -1;
+    }
+    .line {
+      position: relative;
+      width: 1px;
+      height: 100%;
+      overflow: hidden;
+    }
+    .line::after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 15vh;
+      width: 100%;
+      top: -50%;
+      left: 0;
+      animation: drop 7s infinite cubic-bezier(0.4, 0.26, 0, 0.97);
+    }
+    .line:nth-child(1)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #FF4500 75%, #FF4500); animation-delay: 0.5s; }
+    .line:nth-child(2)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #32CD32 75%, #32CD32); animation-delay: 1s; }
+    .line:nth-child(3)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #1E90FF 75%, #1E90FF); animation-delay: 1.5s; }
+    .line:nth-child(4)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #FFD700 75%, #FFD700); animation-delay: 2s; }
+    .line:nth-child(5)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #8A2BE2 75%, #8A2BE2); animation-delay: 2.5s; }
+    .line:nth-child(6)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #20B2AA 75%, #20B2AA); animation-delay: 3s; }
+    .line:nth-child(7)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #DC143C 75%, #DC143C); animation-delay: 3.5s; }
+    .line:nth-child(8)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #00FA9A 75%, #00FA9A); animation-delay: 4s; }
+    .line:nth-child(9)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #FF1493 75%, #FF1493); animation-delay: 4.5s; }
+    .line:nth-child(10)::after { background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #00BFFF 75%, #00BFFF); animation-delay: 5s; }
+    @keyframes drop {
+      0% { top: -50%; }
+      100% { top: 110%; }
+    }
+
+    h1 {
+      font-family: 'Caprasimo', cursive;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00aaff;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #1e2a36;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+    .rutina-item {
+      background-color: #2f3e4f;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .rutina-item h4 {
+      margin: 0 0 5px;
+      color: #00aaff;
+    }
+    .rutina-item p {
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+  <div class="lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="container">
+    <h1>Panel del Usuario</h1>
+    <div id="rutinasUsuario"></div>
+  </div>
+
+  <script>
+    const rutinas = JSON.parse(localStorage.getItem("rutinasFlexfit")) || [];
+
+    function mostrarRutinas() {
+      const contenedor = document.getElementById("rutinasUsuario");
+      contenedor.innerHTML = "<h2>Rutinas Aprobadas</h2>";
+      const aprobadas = rutinas.filter(r => r.aprobada);
+      aprobadas.forEach(r => {
+        contenedor.innerHTML += `
+          <div class="rutina-item">
+            <h4>${r.nombre}</h4>
+            <p>${r.descripcion}</p>
+          </div>
+        `;
+      });
+    }
+
+    mostrarRutinas();
+  </script>
+</body>
+</html>
